@@ -16,7 +16,7 @@
 
 Node.js, npm и PostgreSQL установлены **только на сервере 10.3.0.88** (`vrtvs01`, Ubuntu 24.04, пользователь `vrtadmin`). На локальной машине (Windows) Node.js нет — там только редактируются файлы и работает git.
 
-**Доступ к серверу:** `ssh -i ~/.ssh/virtualoffsd_server vrtadmin@10.3.0.88` (ключ уже настроен, без пароля). Для команд с `sudo` пароль `vrtadmin` — `machine23` (использовать как `echo machine23 | sudo -S <command>`).
+**Доступ к серверу:** `ssh -i ~/.ssh/virtualoffsd_server vrtadmin@10.3.0.88` (ключ уже настроен, без пароля). Для команд с `sudo` нужен пароль пользователя `vrtadmin` — он не хранится в репозитории (см. локальную память Claude/секреты), использовать как `echo <SUDO_PASSWORD> | sudo -S <command>`.
 
 **Модель синхронизации кода:**
 - Репозиторий публичный на GitHub (`https://github.com/nchdch/service.desk.git`), текущая ветка `main`.
@@ -83,44 +83,44 @@ Node.js, npm и PostgreSQL установлены **только на серве
 - Delete: `backend/src/app.controller.ts`, `backend/src/app.controller.spec.ts`, `backend/src/app.service.ts`
 - Modify: `backend/src/app.module.ts`
 
-- [ ] **Step 1: Установить Node.js 20 LTS на сервере**
+- [x] **Step 1: Установить Node.js 20 LTS на сервере**
 
 ```bash
-ssh -i ~/.ssh/virtualoffsd_server vrtadmin@10.3.0.88 "echo machine23 | sudo -S apt-get update"
-ssh -i ~/.ssh/virtualoffsd_server vrtadmin@10.3.0.88 "echo machine23 | sudo -S bash -c \"curl -fsSL https://deb.nodesource.com/setup_20.x | bash -\""
-ssh -i ~/.ssh/virtualoffsd_server vrtadmin@10.3.0.88 "echo machine23 | sudo -S apt-get install -y nodejs"
+ssh -i ~/.ssh/virtualoffsd_server vrtadmin@10.3.0.88 "echo <SUDO_PASSWORD> | sudo -S apt-get update"
+ssh -i ~/.ssh/virtualoffsd_server vrtadmin@10.3.0.88 "echo <SUDO_PASSWORD> | sudo -S bash -c \"curl -fsSL https://deb.nodesource.com/setup_20.x | bash -\""
+ssh -i ~/.ssh/virtualoffsd_server vrtadmin@10.3.0.88 "echo <SUDO_PASSWORD> | sudo -S apt-get install -y nodejs"
 ssh -i ~/.ssh/virtualoffsd_server vrtadmin@10.3.0.88 "node --version && npm --version"
 ```
 Ожидается: `node --version` выводит `v20.x.x`, `npm --version` — `10.x.x`.
 
-- [ ] **Step 2: Сгенерировать NestJS-проект на сервере**
+- [x] **Step 2: Сгенерировать NestJS-проект на сервере**
 
 ```bash
 ssh -i ~/.ssh/virtualoffsd_server vrtadmin@10.3.0.88 "cd ~/service.desk && npx @nestjs/cli@latest new backend --package-manager npm --skip-git --language ts"
 ```
 Ожидается: на сервере создаётся `~/service.desk/backend/` с рабочим NestJS-приложением (включая `node_modules/`).
 
-- [ ] **Step 3: Закоммитить сгенерированный проект на сервере**
+- [x] **Step 3: Закоммитить сгенерированный проект на сервере**
 
 ```bash
 ssh -i ~/.ssh/virtualoffsd_server vrtadmin@10.3.0.88 "cd ~/service.desk && git add backend && git commit -m 'Bootstrap NestJS backend'"
 ```
 Ожидается: коммит создан (`node_modules/` исключён сгенерированным `backend/.gitignore`).
 
-- [ ] **Step 4: Подтянуть сгенерированный проект локально**
+- [x] **Step 4: Подтянуть сгенерированный проект локально**
 
 ```bash
 git pull server feature/foundation-backend
 ```
 Ожидается: в локальном worktree появляется `backend/` со всеми файлами, сгенерированными Nest CLI (без `node_modules/`).
 
-- [ ] **Step 5: Удалить шаблонный контроллер/сервис**
+- [x] **Step 5: Удалить шаблонный контроллер/сервис**
 
 Удалить файлы: `backend/src/app.controller.ts`, `backend/src/app.controller.spec.ts`, `backend/src/app.service.ts`.
 
 Реальные роуты появятся в модулях `auth`, `users`, `organizations` — корневой "Hello World" не нужен.
 
-- [ ] **Step 6: Заменить `backend/src/app.module.ts`**
+- [x] **Step 6: Заменить `backend/src/app.module.ts`**
 
 ```typescript
 import { Module } from '@nestjs/common';
@@ -129,7 +129,7 @@ import { Module } from '@nestjs/common';
 export class AppModule {}
 ```
 
-- [ ] **Step 7: Commit и синхронизация с сервером**
+- [x] **Step 7: Commit и синхронизация с сервером**
 
 ```bash
 git add backend
@@ -137,7 +137,7 @@ git commit -m "Remove default Nest scaffold controller and service"
 git push server feature/foundation-backend
 ```
 
-- [ ] **Step 8: Проверить сборку на сервере**
+- [x] **Step 8: Проверить сборку на сервере**
 
 ```bash
 ssh -i ~/.ssh/virtualoffsd_server vrtadmin@10.3.0.88 "cd ~/service.desk/backend && npm run build"
@@ -153,37 +153,37 @@ ssh -i ~/.ssh/virtualoffsd_server vrtadmin@10.3.0.88 "cd ~/service.desk/backend 
 - Create: `backend/.env` (на сервере, не коммитится)
 - Modify: `backend/.gitignore` (если нужно)
 
-- [ ] **Step 1: Установить PostgreSQL 16 на сервере**
+- [x] **Step 1: Установить PostgreSQL 16 на сервере**
 
 ```bash
-ssh -i ~/.ssh/virtualoffsd_server vrtadmin@10.3.0.88 "echo machine23 | sudo -S apt-get update"
-ssh -i ~/.ssh/virtualoffsd_server vrtadmin@10.3.0.88 "echo machine23 | sudo -S apt-get install -y postgresql postgresql-contrib"
+ssh -i ~/.ssh/virtualoffsd_server vrtadmin@10.3.0.88 "echo <SUDO_PASSWORD> | sudo -S apt-get update"
+ssh -i ~/.ssh/virtualoffsd_server vrtadmin@10.3.0.88 "echo <SUDO_PASSWORD> | sudo -S apt-get install -y postgresql postgresql-contrib"
 ```
 Ожидается: устанавливается PostgreSQL 16 (версия по умолчанию в репозиториях Ubuntu 24.04).
 
-- [ ] **Step 2: Проверить, что служба запущена**
+- [x] **Step 2: Проверить, что служба запущена**
 
 ```bash
 ssh -i ~/.ssh/virtualoffsd_server vrtadmin@10.3.0.88 "systemctl is-active postgresql"
 ```
 Ожидается: `active`.
 
-- [ ] **Step 3: Создать пользователя и базу для проекта**
+- [x] **Step 3: Создать пользователя и базу для проекта**
 
 ```bash
-ssh -i ~/.ssh/virtualoffsd_server vrtadmin@10.3.0.88 "echo machine23 | sudo -S -u postgres psql -c \"CREATE USER virtualoffsd WITH PASSWORD 'virtualoffsd';\""
-ssh -i ~/.ssh/virtualoffsd_server vrtadmin@10.3.0.88 "echo machine23 | sudo -S -u postgres psql -c \"CREATE DATABASE virtualoffsd OWNER virtualoffsd;\""
+ssh -i ~/.ssh/virtualoffsd_server vrtadmin@10.3.0.88 "echo <SUDO_PASSWORD> | sudo -S -u postgres psql -c \"CREATE USER virtualoffsd WITH PASSWORD 'virtualoffsd';\""
+ssh -i ~/.ssh/virtualoffsd_server vrtadmin@10.3.0.88 "echo <SUDO_PASSWORD> | sudo -S -u postgres psql -c \"CREATE DATABASE virtualoffsd OWNER virtualoffsd;\""
 ```
 Ожидается: `CREATE ROLE` и `CREATE DATABASE`.
 
-- [ ] **Step 4: Проверить подключение от имени пользователя проекта**
+- [x] **Step 4: Проверить подключение от имени пользователя проекта**
 
 ```bash
 ssh -i ~/.ssh/virtualoffsd_server vrtadmin@10.3.0.88 "PGPASSWORD=virtualoffsd psql -U virtualoffsd -h localhost -d virtualoffsd -c 'SELECT 1;'"
 ```
 Ожидается: вывод содержит строку с `1`.
 
-- [ ] **Step 5: Создать `backend/.env.example`**
+- [x] **Step 5: Создать `backend/.env.example`**
 
 ```
 DATABASE_URL="postgresql://virtualoffsd:virtualoffsd@localhost:5432/virtualoffsd?schema=public"
@@ -193,7 +193,7 @@ PORT=3000
 SEED_USER_PASSWORD="ChangeMe123!"
 ```
 
-- [ ] **Step 6: Создать рабочий `backend/.env` на сервере**
+- [x] **Step 6: Создать рабочий `backend/.env` на сервере**
 
 ```bash
 git add backend/.env.example
@@ -204,7 +204,7 @@ ssh -i ~/.ssh/virtualoffsd_server vrtadmin@10.3.0.88 "cd ~/service.desk/backend 
 
 Для разработки значения из `.env.example` достаточны (это не продовые секреты).
 
-- [ ] **Step 7: Проверить `.gitignore`**
+- [x] **Step 7: Проверить `.gitignore`**
 
 Открой `backend/.gitignore` (сгенерирован Nest CLI) и убедись, что в нём есть строка `.env`. Если отсутствует — добавь её, закоммить и синхронизируй (`git add backend/.gitignore && git commit -m "Ensure .env is gitignored" && git push server feature/foundation-backend`). `.env.example` не должен попадать под исключение (стандартный шаблон Nest исключает только конкретные `.env*` файлы, не `.env.example`).
 
