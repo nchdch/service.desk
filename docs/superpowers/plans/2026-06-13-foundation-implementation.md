@@ -391,7 +391,7 @@ git commit -m "Add global PrismaModule"
 - Create: `backend/prisma/seed.ts`
 - Modify: `backend/package.json`
 
-- [ ] **Step 1: Установить зависимости**
+- [x] **Step 1: Установить зависимости**
 
 ```bash
 cd backend
@@ -399,7 +399,7 @@ npm install bcryptjs
 npm install -D @types/bcryptjs ts-node
 ```
 
-- [ ] **Step 2: Добавить секцию `prisma.seed` в `backend/package.json`**
+- [x] **Step 2: Добавить секцию `prisma.seed` в `backend/package.json`**
 
 Добавь на верхнем уровне `package.json` (рядом с `"scripts"`):
 ```json
@@ -408,7 +408,7 @@ npm install -D @types/bcryptjs ts-node
 }
 ```
 
-- [ ] **Step 3: Создать `backend/prisma/seed.ts`**
+- [x] **Step 3: Создать `backend/prisma/seed.ts`**
 
 ```typescript
 import { PrismaClient, Role } from '@prisma/client';
@@ -470,21 +470,21 @@ main()
   });
 ```
 
-- [ ] **Step 4: Запустить сидинг**
+- [x] **Step 4: Запустить сидинг**
 
 ```bash
 npx prisma db seed
 ```
 Ожидается: "Running seed command `ts-node prisma/seed.ts` ..." и в конце "The seed command has been executed."
 
-- [ ] **Step 5: Проверить данные в БД**
+- [x] **Step 5: Проверить данные в БД**
 
 ```bash
 ssh -i ~/.ssh/virtualoffsd_server vrtadmin@10.3.0.88 "PGPASSWORD=virtualoffsd psql -U virtualoffsd -h localhost -d virtualoffsd -c 'SELECT email, role, \"organizationId\" FROM \"User\" ORDER BY role;'"
 ```
 Ожидается: 4 строки — `admin`/`manager`/`engineer` с пустым `organizationId`, `client` с UUID `00000000-0000-0000-0000-000000000001`.
 
-- [ ] **Step 6: Commit**
+- [x] **Step 6: Commit**
 
 ```bash
 cd ..
