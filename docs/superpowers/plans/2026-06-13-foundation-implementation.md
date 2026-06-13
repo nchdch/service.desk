@@ -316,14 +316,14 @@ git commit -m "Add Prisma schema with Organization and User models"
 - Create: `backend/src/prisma/prisma.module.ts`
 - Modify: `backend/src/app.module.ts`
 
-- [ ] **Step 1: Установить `@nestjs/config`**
+- [x] **Step 1: Установить `@nestjs/config`**
 
 ```bash
 cd backend
 npm install @nestjs/config
 ```
 
-- [ ] **Step 2: Создать `backend/src/prisma/prisma.service.ts`**
+- [x] **Step 2: Создать `backend/src/prisma/prisma.service.ts`**
 
 ```typescript
 import { Injectable, OnModuleDestroy, OnModuleInit } from '@nestjs/common';
@@ -341,7 +341,7 @@ export class PrismaService extends PrismaClient implements OnModuleInit, OnModul
 }
 ```
 
-- [ ] **Step 3: Создать `backend/src/prisma/prisma.module.ts`**
+- [x] **Step 3: Создать `backend/src/prisma/prisma.module.ts`**
 
 ```typescript
 import { Global, Module } from '@nestjs/common';
@@ -355,7 +355,7 @@ import { PrismaService } from './prisma.service';
 export class PrismaModule {}
 ```
 
-- [ ] **Step 4: Заменить `backend/src/app.module.ts`**
+- [x] **Step 4: Заменить `backend/src/app.module.ts`**
 
 ```typescript
 import { Module } from '@nestjs/common';
@@ -368,14 +368,14 @@ import { PrismaModule } from './prisma/prisma.module';
 export class AppModule {}
 ```
 
-- [ ] **Step 5: Проверить запуск**
+- [x] **Step 5: Проверить запуск**
 
 ```bash
 npm run start:dev
 ```
 Ожидается: в консоли "Nest application successfully started", без ошибок подключения к БД (PrismaService подключается на старте — требует БД из Task 2). Останови сервер (Ctrl+C).
 
-- [ ] **Step 6: Commit**
+- [x] **Step 6: Commit**
 
 ```bash
 cd ..
