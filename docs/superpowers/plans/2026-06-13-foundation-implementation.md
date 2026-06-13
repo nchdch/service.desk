@@ -224,7 +224,7 @@ cd backend
 npm install prisma --save-dev
 npm install @prisma/client
 ```
-**Важно (выявлено по ходу выполнения):** на сервере `npm install prisma` ставит актуальную major-версию (на момент выполнения — Prisma 7.x), которая убрала поддержку `url = env("DATABASE_URL")` в `datasource` блоке схемы (требует `prisma.config.ts`) и изменила вывод `prisma init`. Схема Task 3 (см. Step 3) написана для классической модели (Prisma 5/6). Поэтому фактически установлена последняя версия Prisma 6.x: `npm install prisma@6.19.3 --save-dev` и `npm install @prisma/client@6.19.3`. Это сохраняет схему как в Step 3 без изменений и совместимо с тем, что будут использовать последующие задачи (PrismaService и т.д.).
+**Важно (выявлено по ходу выполнения):** на сервере `npm install prisma` ставит актуальную major-версию (на момент выполнения — Prisma 7.x), которая убрала поддержку `url = env("DATABASE_URL")` в `datasource` блоке схемы (требует `prisma.config.ts`) и изменила вывод `prisma init`. Схема Task 3 (см. Step 3) написана для классической модели (Prisma 5/6). Поэтому фактически установлена последняя версия Prisma 6.x: `npm install prisma@6.19.3 --save-dev` и `npm install @prisma/client@6.19.3`. Это сохраняет схему как в Step 3 без изменений и совместимо с тем, что будут использовать последующие задачи (PrismaService и т.д.). Примечание: пакет `@prisma/engines` версии 6.19.3 тянет `@prisma/engines-version` из линейки 7.x (бинарники движка) — это не противоречит пинингу CLI/клиента на 6.19.3: формат схемы/миграций остаётся классическим (6.x), а движки 7.x с ним совместимы (`prisma migrate status`, `npm run build` и работа с БД проверены и работают корректно).
 
 - [x] **Step 2: Инициализировать Prisma**
 
