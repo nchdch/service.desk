@@ -667,11 +667,11 @@ git commit -m "Add OrganizationsModule"
 - Modify: `backend/src/app.module.ts`
 - Modify: `backend/src/main.ts`
 
-- [ ] **Step 1: Удалить шаблонный e2e-тест**
+- [x] **Step 1: Удалить шаблонный e2e-тест**
 
 Удалить `backend/test/app.e2e-spec.ts` (тестирует удалённый в Task 1 корневой роут).
 
-- [ ] **Step 2: Написать `backend/test/auth.e2e-spec.ts` (пока будет падать)**
+- [x] **Step 2: Написать `backend/test/auth.e2e-spec.ts` (пока будет падать)**
 
 ```typescript
 import { Test, TestingModule } from '@nestjs/testing';
@@ -747,7 +747,7 @@ describe('Auth (e2e)', () => {
 });
 ```
 
-- [ ] **Step 3: Запустить e2e-тесты и убедиться, что они падают**
+- [x] **Step 3: Запустить e2e-тесты и убедиться, что они падают**
 
 ```bash
 cd backend
@@ -755,14 +755,14 @@ npm run test:e2e
 ```
 Ожидается: FAIL — `/auth/login` возвращает 404 (роут пока не существует).
 
-- [ ] **Step 4: Установить зависимости auth**
+- [x] **Step 4: Установить зависимости auth**
 
 ```bash
 npm install @nestjs/jwt @nestjs/passport passport passport-jwt class-validator class-transformer
 npm install -D @types/passport-jwt
 ```
 
-- [ ] **Step 5: Создать `backend/src/auth/auth.types.ts`**
+- [x] **Step 5: Создать `backend/src/auth/auth.types.ts`**
 
 ```typescript
 import { Role } from '@prisma/client';
@@ -784,7 +784,7 @@ export interface JwtPayload {
 }
 ```
 
-- [ ] **Step 6: Создать `backend/src/auth/dto/login.dto.ts`**
+- [x] **Step 6: Создать `backend/src/auth/dto/login.dto.ts`**
 
 ```typescript
 import { IsEmail, IsString, MinLength } from 'class-validator';
@@ -799,7 +799,7 @@ export class LoginDto {
 }
 ```
 
-- [ ] **Step 7: Создать `backend/src/auth/auth.service.ts`**
+- [x] **Step 7: Создать `backend/src/auth/auth.service.ts`**
 
 ```typescript
 import { Injectable, UnauthorizedException } from '@nestjs/common';
@@ -852,7 +852,7 @@ export class AuthService {
 }
 ```
 
-- [ ] **Step 8: Создать `backend/src/auth/strategies/jwt.strategy.ts`**
+- [x] **Step 8: Создать `backend/src/auth/strategies/jwt.strategy.ts`**
 
 ```typescript
 import { Injectable } from '@nestjs/common';
@@ -883,7 +883,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
 }
 ```
 
-- [ ] **Step 9: Создать декораторы**
+- [x] **Step 9: Создать декораторы**
 
 `backend/src/auth/decorators/public.decorator.ts`:
 ```typescript
@@ -906,7 +906,7 @@ export const CurrentUser = createParamDecorator(
 );
 ```
 
-- [ ] **Step 10: Создать `backend/src/auth/guards/jwt-auth.guard.ts`**
+- [x] **Step 10: Создать `backend/src/auth/guards/jwt-auth.guard.ts`**
 
 ```typescript
 import { ExecutionContext, Injectable } from '@nestjs/common';
@@ -935,7 +935,7 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
 }
 ```
 
-- [ ] **Step 11: Создать `backend/src/auth/auth.controller.ts`**
+- [x] **Step 11: Создать `backend/src/auth/auth.controller.ts`**
 
 ```typescript
 import { Body, Controller, Get, Post } from '@nestjs/common';
@@ -963,7 +963,7 @@ export class AuthController {
 }
 ```
 
-- [ ] **Step 12: Создать `backend/src/auth/auth.module.ts`**
+- [x] **Step 12: Создать `backend/src/auth/auth.module.ts`**
 
 ```typescript
 import { Module } from '@nestjs/common';
@@ -997,7 +997,7 @@ import { JwtAuthGuard } from './guards/jwt-auth.guard';
 export class AuthModule {}
 ```
 
-- [ ] **Step 13: Обновить `backend/src/app.module.ts`**
+- [x] **Step 13: Обновить `backend/src/app.module.ts`**
 
 ```typescript
 import { Module } from '@nestjs/common';
@@ -1019,7 +1019,7 @@ import { AuthModule } from './auth/auth.module';
 export class AppModule {}
 ```
 
-- [ ] **Step 14: Обновить `backend/src/main.ts`**
+- [x] **Step 14: Обновить `backend/src/main.ts`**
 
 ```typescript
 import { NestFactory } from '@nestjs/core';
@@ -1034,14 +1034,14 @@ async function bootstrap() {
 bootstrap();
 ```
 
-- [ ] **Step 15: Запустить e2e-тесты и убедиться, что они проходят**
+- [x] **Step 15: Запустить e2e-тесты и убедиться, что они проходят**
 
 ```bash
 npm run test:e2e
 ```
 Ожидается: PASS, 4 теста зелёные. (Требуется запущенный и засеянный PostgreSQL из Task 2/5.)
 
-- [ ] **Step 16: Commit**
+- [x] **Step 16: Commit**
 
 ```bash
 cd ..
