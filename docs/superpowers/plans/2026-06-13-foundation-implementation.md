@@ -16,7 +16,7 @@
 
 Node.js, npm и PostgreSQL установлены **только на сервере 10.3.0.88** (`vrtvs01`, Ubuntu 24.04, пользователь `vrtadmin`). На локальной машине (Windows) Node.js нет — там только редактируются файлы и работает git.
 
-**Доступ к серверу:** `ssh -i ~/.ssh/virtualoffsd_server vrtadmin@10.3.0.88` (ключ уже настроен, без пароля). Для команд с `sudo` пароль `vrtadmin` — `machine23` (использовать как `echo machine23 | sudo -S <command>`).
+**Доступ к серверу:** `ssh -i ~/.ssh/virtualoffsd_server vrtadmin@10.3.0.88` (ключ уже настроен, без пароля). Для команд с `sudo` нужен пароль пользователя `vrtadmin` — он не хранится в репозитории (см. локальную память Claude/секреты), использовать как `echo <SUDO_PASSWORD> | sudo -S <command>`.
 
 **Модель синхронизации кода:**
 - Репозиторий публичный на GitHub (`https://github.com/nchdch/service.desk.git`), текущая ветка `main`.
@@ -86,9 +86,9 @@ Node.js, npm и PostgreSQL установлены **только на серве
 - [ ] **Step 1: Установить Node.js 20 LTS на сервере**
 
 ```bash
-ssh -i ~/.ssh/virtualoffsd_server vrtadmin@10.3.0.88 "echo machine23 | sudo -S apt-get update"
-ssh -i ~/.ssh/virtualoffsd_server vrtadmin@10.3.0.88 "echo machine23 | sudo -S bash -c \"curl -fsSL https://deb.nodesource.com/setup_20.x | bash -\""
-ssh -i ~/.ssh/virtualoffsd_server vrtadmin@10.3.0.88 "echo machine23 | sudo -S apt-get install -y nodejs"
+ssh -i ~/.ssh/virtualoffsd_server vrtadmin@10.3.0.88 "echo <SUDO_PASSWORD> | sudo -S apt-get update"
+ssh -i ~/.ssh/virtualoffsd_server vrtadmin@10.3.0.88 "echo <SUDO_PASSWORD> | sudo -S bash -c \"curl -fsSL https://deb.nodesource.com/setup_20.x | bash -\""
+ssh -i ~/.ssh/virtualoffsd_server vrtadmin@10.3.0.88 "echo <SUDO_PASSWORD> | sudo -S apt-get install -y nodejs"
 ssh -i ~/.ssh/virtualoffsd_server vrtadmin@10.3.0.88 "node --version && npm --version"
 ```
 Ожидается: `node --version` выводит `v20.x.x`, `npm --version` — `10.x.x`.
@@ -156,8 +156,8 @@ ssh -i ~/.ssh/virtualoffsd_server vrtadmin@10.3.0.88 "cd ~/service.desk/backend 
 - [ ] **Step 1: Установить PostgreSQL 16 на сервере**
 
 ```bash
-ssh -i ~/.ssh/virtualoffsd_server vrtadmin@10.3.0.88 "echo machine23 | sudo -S apt-get update"
-ssh -i ~/.ssh/virtualoffsd_server vrtadmin@10.3.0.88 "echo machine23 | sudo -S apt-get install -y postgresql postgresql-contrib"
+ssh -i ~/.ssh/virtualoffsd_server vrtadmin@10.3.0.88 "echo <SUDO_PASSWORD> | sudo -S apt-get update"
+ssh -i ~/.ssh/virtualoffsd_server vrtadmin@10.3.0.88 "echo <SUDO_PASSWORD> | sudo -S apt-get install -y postgresql postgresql-contrib"
 ```
 Ожидается: устанавливается PostgreSQL 16 (версия по умолчанию в репозиториях Ubuntu 24.04).
 
@@ -171,8 +171,8 @@ ssh -i ~/.ssh/virtualoffsd_server vrtadmin@10.3.0.88 "systemctl is-active postgr
 - [ ] **Step 3: Создать пользователя и базу для проекта**
 
 ```bash
-ssh -i ~/.ssh/virtualoffsd_server vrtadmin@10.3.0.88 "echo machine23 | sudo -S -u postgres psql -c \"CREATE USER virtualoffsd WITH PASSWORD 'virtualoffsd';\""
-ssh -i ~/.ssh/virtualoffsd_server vrtadmin@10.3.0.88 "echo machine23 | sudo -S -u postgres psql -c \"CREATE DATABASE virtualoffsd OWNER virtualoffsd;\""
+ssh -i ~/.ssh/virtualoffsd_server vrtadmin@10.3.0.88 "echo <SUDO_PASSWORD> | sudo -S -u postgres psql -c \"CREATE USER virtualoffsd WITH PASSWORD 'virtualoffsd';\""
+ssh -i ~/.ssh/virtualoffsd_server vrtadmin@10.3.0.88 "echo <SUDO_PASSWORD> | sudo -S -u postgres psql -c \"CREATE DATABASE virtualoffsd OWNER virtualoffsd;\""
 ```
 Ожидается: `CREATE ROLE` и `CREATE DATABASE`.
 
