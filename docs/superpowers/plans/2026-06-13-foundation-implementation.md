@@ -217,22 +217,25 @@ ssh -i ~/.ssh/virtualoffsd_server vrtadmin@10.3.0.88 "cd ~/service.desk/backend 
 - Create: `backend/prisma/schema.prisma`
 - Create: `backend/prisma/migrations/`
 
-- [ ] **Step 1: Установить Prisma**
+- [x] **Step 1: Установить Prisma**
 
 ```bash
 cd backend
 npm install prisma --save-dev
 npm install @prisma/client
 ```
+**Важно (выявлено по ходу выполнения):** на сервере `npm install prisma` ставит актуальную major-версию (на момент выполнения — Prisma 7.x), которая убрала поддержку `url = env("DATABASE_URL")` в `datasource` блоке схемы (требует `prisma.config.ts`) и изменила вывод `prisma init`. Схема Task 3 (см. Step 3) написана для классической модели (Prisma 5/6). Поэтому фактически установлена последняя версия Prisma 6.x: `npm install prisma@6.19.3 --save-dev` и `npm install @prisma/client@6.19.3`. Это сохраняет схему как в Step 3 без изменений и совместимо с тем, что будут использовать последующие задачи (PrismaService и т.д.).
 
-- [ ] **Step 2: Инициализировать Prisma**
+- [x] **Step 2: Инициализировать Prisma**
 
 ```bash
 npx prisma init --datasource-provider postgresql
 ```
 Ожидается: создаётся `prisma/schema.prisma`. Так как `backend/.env` уже существует с нашим `DATABASE_URL`, Prisma не станет его перезаписывать (может вывести предупреждение — это нормально).
 
-- [ ] **Step 3: Заменить содержимое `backend/prisma/schema.prisma`**
+С Prisma 7 `init` также создаёт `prisma.config.ts` и добавляет `/generated/prisma` в `.gitignore` — после перехода на Prisma 6.19.3 (см. Step 1) эти артефакты были удалены/откатены, так как они не нужны для классической модели схемы.
+
+- [x] **Step 3: Заменить содержимое `backend/prisma/schema.prisma`**
 
 ```prisma
 generator client {
@@ -274,21 +277,29 @@ model User {
 }
 ```
 
-- [ ] **Step 4: Применить миграцию**
+- [x] **Step 4: Применить миграцию**
 
 ```bash
 npx prisma migrate dev --name init
 ```
 Ожидается: создаётся `prisma/migrations/<timestamp>_init/migration.sql`, миграция применяется, в конце — "Your database is now in sync with your schema."
 
-- [ ] **Step 5: Проверить статус миграций**
+**Важно (выявлено по ходу выполнения):** `prisma migrate dev` завершился ошибкой `P3014` — пользователь БД `virtualoffsd` не имеет права `CREATEDB`, необходимого Prisma для создания shadow database, а доступа к суперпользователю `postgres` без sudo нет. Так как sudo для этой задачи запрещён, миграция была создана и применена без shadow database:
+```bash
+npx prisma migrate diff --from-empty --to-schema-datamodel=./prisma/schema.prisma --script > prisma/migrations/<timestamp>_init/migration.sql
+npx prisma migrate deploy
+npx prisma generate
+```
+Результат идентичен тому, что создал бы `migrate dev` (та же SQL, та же запись в `_prisma_migrations`), но без необходимости создавать shadow database. Если в будущем понадобится `prisma migrate dev` в полном объёме (для diff'ов на лету), нужно будет выдать `virtualoffsd` право `CREATEDB` через суперпользователя `postgres`.
+
+- [x] **Step 5: Проверить статус миграций**
 
 ```bash
 npx prisma migrate status
 ```
 Ожидается: "Database schema is up to date!"
 
-- [ ] **Step 6: Commit**
+- [x] **Step 6: Commit**
 
 ```bash
 cd ..
