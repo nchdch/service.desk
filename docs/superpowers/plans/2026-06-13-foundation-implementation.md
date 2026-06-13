@@ -584,7 +584,7 @@ git commit -m "Add UsersModule with email lookup and safe listing"
 - Create: `backend/src/organizations/organizations.module.ts`
 - Modify: `backend/src/app.module.ts`
 
-- [ ] **Step 1: Создать `backend/src/organizations/organizations.service.ts`**
+- [x] **Step 1: Создать `backend/src/organizations/organizations.service.ts`**
 
 ```typescript
 import { Injectable } from '@nestjs/common';
@@ -600,7 +600,7 @@ export class OrganizationsService {
 }
 ```
 
-- [ ] **Step 2: Создать `backend/src/organizations/organizations.module.ts`**
+- [x] **Step 2: Создать `backend/src/organizations/organizations.module.ts`**
 
 ```typescript
 import { Module } from '@nestjs/common';
@@ -613,7 +613,7 @@ import { OrganizationsService } from './organizations.service';
 export class OrganizationsModule {}
 ```
 
-- [ ] **Step 3: Обновить `backend/src/app.module.ts`**
+- [x] **Step 3: Обновить `backend/src/app.module.ts`**
 
 ```typescript
 import { Module } from '@nestjs/common';
@@ -633,14 +633,14 @@ import { OrganizationsModule } from './organizations/organizations.module';
 export class AppModule {}
 ```
 
-- [ ] **Step 4: Проверить сборку**
+- [x] **Step 4: Проверить сборку**
 
 ```bash
 cd backend
 npm run build
 ```
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 cd ..
