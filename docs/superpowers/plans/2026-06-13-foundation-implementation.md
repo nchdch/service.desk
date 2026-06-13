@@ -501,7 +501,7 @@ git commit -m "Add seed script for test users and demo organization"
 - Create: `backend/src/users/users.module.ts`
 - Modify: `backend/src/app.module.ts`
 
-- [ ] **Step 1: Создать `backend/src/users/users.service.ts`**
+- [x] **Step 1: Создать `backend/src/users/users.service.ts`**
 
 ```typescript
 import { Injectable } from '@nestjs/common';
@@ -533,7 +533,7 @@ export class UsersService {
 }
 ```
 
-- [ ] **Step 2: Создать `backend/src/users/users.module.ts`**
+- [x] **Step 2: Создать `backend/src/users/users.module.ts`**
 
 ```typescript
 import { Module } from '@nestjs/common';
@@ -546,7 +546,7 @@ import { UsersService } from './users.service';
 export class UsersModule {}
 ```
 
-- [ ] **Step 3: Обновить `backend/src/app.module.ts`**
+- [x] **Step 3: Обновить `backend/src/app.module.ts`**
 
 ```typescript
 import { Module } from '@nestjs/common';
@@ -560,14 +560,14 @@ import { UsersModule } from './users/users.module';
 export class AppModule {}
 ```
 
-- [ ] **Step 4: Проверить сборку**
+- [x] **Step 4: Проверить сборку**
 
 ```bash
 cd backend
 npm run build
 ```
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 cd ..
