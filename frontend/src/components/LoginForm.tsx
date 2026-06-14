@@ -46,7 +46,6 @@ export function LoginForm() {
         type="email"
         name="email"
         autoComplete="username"
-        required
         fullWidth
         value={email}
         onChange={(e) => setEmail(e.target.value)}
@@ -56,7 +55,6 @@ export function LoginForm() {
         type="password"
         name="password"
         autoComplete="current-password"
-        required
         fullWidth
         value={password}
         onChange={(e) => setPassword(e.target.value)}
