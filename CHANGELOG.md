@@ -26,3 +26,12 @@
   - Docker, Node.js, PostgreSQL, nginx — не установлены; есть git и python3
   - sudo для пользователя vrtadmin требует пароль
 - `docs/TZ.md` обновлён: раздел 5 дополнен фактической конфигурацией сервера, в раздел 7 добавлен открытый вопрос про объём диска
+
+## 2026-06-13 — Backend-фундамент (подпроект 0)
+
+- Создан backend на NestJS + Prisma + PostgreSQL (папка `backend/`)
+- Модель данных: `Organization`, `User` (роли CLIENT/ENGINEER/MANAGER/ADMIN)
+- Node.js 20 LTS и PostgreSQL 16 установлены нативно на сервере 10.3.0.88 (Ubuntu, через apt/NodeSource — без Docker, недоступен на машине разработки)
+- Реализована JWT-аутентификация (`POST /auth/login`, `GET /auth/me`) и RBAC (`GET /organizations`, `GET /users` — только ADMIN)
+- Сидинг: демо-организация + 4 тестовых пользователя (по одному на роль)
+- e2e-тесты покрывают аутентификацию и RBAC
