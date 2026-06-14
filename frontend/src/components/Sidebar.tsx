@@ -3,7 +3,16 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
-import { Ticket, ClipboardList, Server, BookOpen, BarChart3, Users, Building2, LogOut } from 'lucide-react';
+import {
+  Ticket,
+  ClipboardList,
+  Server,
+  BookOpen,
+  BarChart3,
+  Users,
+  Building2,
+  LogOut,
+} from 'lucide-react';
 import { Avatar } from '@/components/ui/Avatar';
 import { Badge } from '@/components/ui/Badge';
 import { IconButton } from '@/components/ui/IconButton';
@@ -18,10 +27,30 @@ interface NavItem {
 
 const WORK_ITEMS: NavItem[] = [
   { href: '/coming-soon', label: 'Заявки', icon: Ticket, comingSoon: true },
-  { href: '/coming-soon', label: 'Мои заявки', icon: ClipboardList, comingSoon: true },
-  { href: '/coming-soon', label: 'Оборудование', icon: Server, comingSoon: true },
-  { href: '/coming-soon', label: 'База знаний', icon: BookOpen, comingSoon: true },
-  { href: '/coming-soon', label: 'Аналитика', icon: BarChart3, comingSoon: true },
+  {
+    href: '/coming-soon',
+    label: 'Мои заявки',
+    icon: ClipboardList,
+    comingSoon: true,
+  },
+  {
+    href: '/coming-soon',
+    label: 'Оборудование',
+    icon: Server,
+    comingSoon: true,
+  },
+  {
+    href: '/coming-soon',
+    label: 'База знаний',
+    icon: BookOpen,
+    comingSoon: true,
+  },
+  {
+    href: '/coming-soon',
+    label: 'Аналитика',
+    icon: BarChart3,
+    comingSoon: true,
+  },
 ];
 
 const MANAGEMENT_ITEMS: NavItem[] = [
@@ -53,7 +82,13 @@ export function Sidebar({ user }: SidebarProps) {
   return (
     <aside className="vds-sidebar">
       <div className="vds-sidebar__brand">
-        <Image className="vds-sidebar__brand-logo" src="/logo-mark.png" alt="" width={24} height={24} />
+        <Image
+          className="vds-sidebar__brand-logo"
+          src="/logo-mark.png"
+          alt=""
+          width={24}
+          height={24}
+        />
         <div className="vds-sidebar__brand-text">
           <span className="vds-sidebar__brand-title">Виртуальный офис</span>
           <span className="vds-sidebar__brand-subtitle">Service Desk</span>
@@ -73,7 +108,11 @@ export function Sidebar({ user }: SidebarProps) {
                 <item.icon />
                 {item.label}
                 {item.comingSoon && (
-                  <Badge tone="neutral" size="sm" className="vds-sidebar__item-count">
+                  <Badge
+                    tone="neutral"
+                    size="sm"
+                    className="vds-sidebar__item-count"
+                  >
                     скоро
                   </Badge>
                 )}
