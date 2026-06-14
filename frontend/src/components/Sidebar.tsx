@@ -16,7 +16,8 @@ import {
 import { Avatar } from '@/components/ui/Avatar';
 import { Badge } from '@/components/ui/Badge';
 import { IconButton } from '@/components/ui/IconButton';
-import type { CurrentUser, UserRole } from '@/lib/auth';
+import { ROLE_LABELS } from '@/lib/auth';
+import type { CurrentUser } from '@/lib/auth';
 
 interface NavItem {
   href: string;
@@ -57,13 +58,6 @@ const MANAGEMENT_ITEMS: NavItem[] = [
   { href: '/users', label: 'Пользователи', icon: Users },
   { href: '/organizations', label: 'Организации', icon: Building2 },
 ];
-
-const ROLE_LABELS: Record<UserRole, string> = {
-  CLIENT: 'Клиент',
-  ENGINEER: 'Инженер',
-  MANAGER: 'Руководитель',
-  ADMIN: 'Администратор',
-};
 
 export interface SidebarProps {
   user: CurrentUser;
