@@ -538,3 +538,36 @@
 .vds-avatar__status--offline {
   background: var(--slate-400);
 }
+
+/* DataTable */
+.vds-datatable-wrap {
+  width: 100%;
+  overflow-x: auto;
+}
+.vds-datatable {
+  width: 100%;
+  border-collapse: collapse;
+  font: var(--font-body);
+  color: var(--text-body);
+}
+.vds-datatable__head {
+  padding: var(--space-2) var(--space-4);
+  text-align: left;
+  font: var(--font-label);
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border-subtle);
+  white-space: nowrap;
+}
+.vds-datatable__row:hover {
+  background: var(--surface-hover);
+}
+.vds-datatable__cell {
+  padding: var(--space-3) var(--space-4);
+  border-bottom: 1px solid var(--border-subtle);
+}
+.vds-datatable__empty {
+  padding: var(--space-8) var(--space-4);
+  text-align: center;
+  font: var(--font-body);
+  color: var(--text-muted);
+}
