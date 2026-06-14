@@ -1,0 +1,68 @@
+/* ============================================================
+   TYPOGRAPHY — Виртуальный офис SD
+   Golos Text (UI, strong Cyrillic) + JetBrains Mono (data/IDs).
+   Compact power-user scale. Sizes in rem (root = 16px).
+   ============================================================ */
+
+:root {
+  /* Families */
+  --font-sans: 'Golos Text', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', 'Cascadia Code', monospace;
+
+  /* Weights */
+  --fw-regular:  400; /* @kind other */
+  --fw-medium:   500; /* @kind other */
+  --fw-semibold: 600; /* @kind other */
+  --fw-bold:     700; /* @kind other */
+  --fw-black:    800; /* @kind other */
+
+  /* Type scale — compact. Pair size + line-height. */
+  --text-2xs:  0.6875rem;  /* 11px — micro labels, table meta */
+  --text-xs:   0.75rem;    /* 12px — captions, badges, dense table */
+  --text-sm:   0.8125rem;  /* 13px — secondary body, controls */
+  --text-base: 0.875rem;   /* 14px — DEFAULT UI body */
+  --text-md:   1rem;       /* 16px — emphasized body */
+  --text-lg:   1.125rem;   /* 18px — card titles */
+  --text-xl:   1.375rem;   /* 22px — section headings */
+  --text-2xl:  1.75rem;    /* 28px — page titles */
+  --text-3xl:  2.25rem;    /* 36px — display / hero numbers */
+  --text-4xl:  3rem;       /* 48px — marketing display */
+
+  /* Line heights */
+  --lh-none:    1; /* @kind other */
+  --lh-tight:   1.2; /* @kind other */
+  --lh-snug:    1.35; /* @kind other */
+  --lh-normal:  1.5; /* @kind other */
+  --lh-relaxed: 1.65; /* @kind other */
+
+  /* Letter spacing */
+  --tracking-tighter: -0.02em;  /* @kind other */
+  --tracking-tight:   -0.011em; /* @kind other */
+  --tracking-normal:  0;         /* @kind other */
+  --tracking-wide:    0.04em;   /* @kind other */
+  --tracking-caps:    0.06em;   /* @kind other */
+
+  /* Semantic roles */
+  --font-display: var(--fw-bold) var(--text-3xl)/var(--lh-tight) var(--font-sans);
+  --font-page-title: var(--fw-bold) var(--text-2xl)/var(--lh-tight) var(--font-sans);
+  --font-heading: var(--fw-semibold) var(--text-xl)/var(--lh-snug) var(--font-sans);
+  --font-card-title: var(--fw-semibold) var(--text-lg)/var(--lh-snug) var(--font-sans);
+  --font-body: var(--fw-regular) var(--text-base)/var(--lh-normal) var(--font-sans);
+  --font-body-sm: var(--fw-regular) var(--text-sm)/var(--lh-normal) var(--font-sans);
+  --font-label: var(--fw-medium) var(--text-sm)/var(--lh-snug) var(--font-sans);
+  --font-caption: var(--fw-regular) var(--text-xs)/var(--lh-snug) var(--font-sans);
+  --font-mono-data: var(--fw-medium) var(--text-sm)/var(--lh-snug) var(--font-mono);
+}
+
+/* Optional utility classes (cards/specimens can use these) */
+.t-display     { font: var(--font-display);    letter-spacing: var(--tracking-tighter); color: var(--text-strong); }
+.t-page-title  { font: var(--font-page-title); letter-spacing: var(--tracking-tight); color: var(--text-strong); }
+.t-heading     { font: var(--font-heading);    letter-spacing: var(--tracking-tight); color: var(--text-strong); }
+.t-card-title  { font: var(--font-card-title); letter-spacing: var(--tracking-tight); color: var(--text-strong); }
+.t-body        { font: var(--font-body);       color: var(--text-body); }
+.t-body-sm     { font: var(--font-body-sm);     color: var(--text-body); }
+.t-label       { font: var(--font-label);      color: var(--text-body); }
+.t-caption     { font: var(--font-caption);    color: var(--text-muted); }
+.t-mono        { font: var(--font-mono-data);  color: var(--text-body); }
+.t-overline    { font: var(--fw-semibold) var(--text-2xs)/var(--lh-none) var(--font-sans);
+                 letter-spacing: var(--tracking-caps); text-transform: uppercase; color: var(--text-muted); }

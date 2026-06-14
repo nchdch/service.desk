@@ -1,0 +1,226 @@
+/* ============================================================
+   COLORS — Виртуальный офис SD
+   Brand palette taken from virtualoff.ru: a green "V" mark
+   (#02a36c, gradient #006866→#00bc75) topped by a warm orange
+   dot (#ff6a29, gradient #ff003d→#ffaa00).
+
+   Green + orange are the BRAND IDENTITY (logo, success, warm
+   highlights). The INTERACTIVE accent — primary actions, links,
+   focus, selection — is INDIGO, kept distinct so it never
+   collides with the green "resolved" or orange "in-progress"
+   states. Slate neutrals, light + dark, semantic status hues.
+   ============================================================ */
+
+:root {
+  /* ---- Base palette: Green (brand identity / success) — the "V" ---- */
+  --green-50:  #e7f8f0;
+  --green-100: #c6f0dd;
+  --green-200: #8fe4c2;
+  --green-300: #4fd4a3;
+  --green-400: #12bd84;
+  --green-500: #02a36c;  /* brand core */
+  --green-600: #03875b;  /* primary action (white text) */
+  --green-700: #046e4a;
+  --green-800: #06573b;
+  --green-900: #07412d;
+
+  /* ---- Base palette: Orange (warm brand accent) — the dot ---- */
+  --orange-50:  #fff2ec;
+  --orange-100: #ffe0d0;
+  --orange-200: #ffc1a0;
+  --orange-300: #ff9f6e;
+  --orange-400: #ff7d3f;
+  --orange-500: #ff6a29;  /* brand accent core */
+  --orange-600: #f1551b;
+  --orange-700: #c8420f;
+
+  /* ---- Base palette: Indigo (primary action / interactive) ---- */
+  --indigo-50:  #eef2ff;
+  --indigo-100: #e0e7ff;
+  --indigo-200: #c7d2fe;
+  --indigo-300: #a5b4fc;
+  --indigo-400: #818cf8;
+  --indigo-500: #6366f1;
+  --indigo-600: #4f46e5;  /* primary action */
+  --indigo-700: #4338ca;
+  --indigo-800: #3730a3;
+  --indigo-900: #312e81;
+
+  /* ---- Base palette: Slate (neutrals / surfaces / text) ---- */
+  --slate-0:   #ffffff;
+  --slate-25:  #fcfcfd;
+  --slate-50:  #f7faf9;
+  --slate-100: #eef3f1;
+  --slate-150: #e6ece9;
+  --slate-200: #dde5e2;
+  --slate-300: #c5d0cc;
+  --slate-400: #91a09b;
+  --slate-500: #647571;
+  --slate-600: #485754;
+  --slate-700: #334240;
+  --slate-800: #1d2a28;
+  --slate-900: #0e1816;
+  --slate-950: #060e0c;
+
+  /* ---- Status hues (semantic ramps) ---- */
+  /* success / решена / в норме (reuses brand green family) */
+  --emerald-50: #ecfdf5; --emerald-100: #d1fae5; --emerald-500: #10b981;
+  --emerald-600: #059669; --emerald-700: #047857;
+  /* warning / ожидание / приближение к SLA */
+  --amber-50:  #fffbeb; --amber-100: #fef3c7; --amber-500: #f59e0b;
+  --amber-600: #d97706; --amber-700: #b45309;
+  /* danger / нарушение SLA / критич. приоритет */
+  --red-50:    #fef2f2; --red-100: #fee2e2; --red-500: #ef4444;
+  --red-600:   #dc2626; --red-700: #b91c1c;
+  /* info / новая / нейтральный акцент */
+  --sky-50:    #eff6ff; --sky-100: #dbeafe; --sky-500: #3b82f6;
+  --sky-600:   #2563eb; --sky-700: #1d4ed8;
+  /* purple / AI-ассистент */
+  --violet-50: #f5f3ff; --violet-100: #ede9fe; --violet-500: #8b5cf6;
+  --violet-600: #7c3aed; --violet-700: #6d28d9;
+
+  /* ============================================================
+     SEMANTIC ALIASES — LIGHT (default)
+     Always reference these in components, never the base ramps.
+     ============================================================ */
+
+  /* Surfaces (stacked elevation) */
+  --surface-app:      var(--slate-50);    /* app background */
+  --surface-card:     var(--slate-0);     /* panels, cards */
+  --surface-raised:   var(--slate-0);     /* popovers, menus */
+  --surface-sunken:   var(--slate-100);   /* wells, inputs bg */
+  --surface-hover:    var(--slate-100);   /* row / item hover */
+  --surface-active:   var(--slate-150);   /* pressed / selected bg */
+  --surface-inverse:  var(--slate-900);   /* tooltips, toasts */
+
+  /* Text */
+  --text-strong:   var(--slate-900);   /* headings, key numbers */
+  --text-body:     var(--slate-700);   /* default body */
+  --text-muted:    var(--slate-500);   /* secondary, captions */
+  --text-subtle:   var(--slate-400);   /* placeholders, disabled */
+  --text-inverse:  var(--slate-0);     /* on dark/accent surfaces */
+  --text-link:     var(--indigo-700);
+  --text-on-accent: #ffffff;
+
+  /* Borders & dividers */
+  --border-subtle:  var(--slate-150);  /* hairlines, table rows */
+  --border-default: var(--slate-200);  /* cards, inputs */
+  --border-strong:  var(--slate-300);  /* emphasized, hover inputs */
+  --border-focus:   var(--indigo-600);
+
+  /* Accent / primary action = INDIGO (interactive) */
+  --accent:          var(--indigo-600);
+  --accent-hover:    var(--indigo-700);
+  --accent-active:   var(--indigo-800);
+  --accent-subtle:   var(--indigo-50);   /* tinted bg */
+  --accent-subtle-hover: var(--indigo-100);
+  --accent-border:   var(--indigo-200);
+  --accent-text:     var(--indigo-700);  /* accent text on light */
+  --focus-ring:      color-mix(in srgb, var(--indigo-600) 32%, transparent);
+
+  /* Brand identity = GREEN (logo, brand moments). Use --brand for
+     on-brand surfaces; primary actions use --accent (indigo). */
+  --brand:           var(--green-600);
+  --brand-strong:    var(--green-700);
+  --brand-subtle:    var(--green-50);
+  --brand-border:    var(--green-200);
+  --brand-text:      var(--green-700);
+
+  /* Warm brand accent = ORANGE (highlights, "в работе", marketing pops) */
+  --warm:            var(--orange-500);
+  --warm-hover:      var(--orange-600);
+  --warm-subtle:     var(--orange-50);
+  --warm-subtle-hover: var(--orange-100);
+  --warm-border:     var(--orange-200);
+  --warm-text:       var(--orange-700);
+
+  /* Status — text/icon, subtle bg, border */
+  --success:        var(--green-600); --success-bg: var(--green-50);  --success-border: var(--green-100);
+  --warning:        var(--amber-600); --warning-bg: var(--amber-50);  --warning-border: var(--amber-100);
+  --danger:         var(--red-600);   --danger-bg:  var(--red-50);    --danger-border:  var(--red-100);
+  --info:           var(--sky-600);   --info-bg:    var(--sky-50);    --info-border:    var(--sky-100);
+  --ai:             var(--violet-600);--ai-bg:      var(--violet-50); --ai-border:      var(--violet-100);
+
+  /* AI assistant accent surface (the killer feature) */
+  --ai-surface:     var(--violet-50);
+  --ai-strong:      var(--violet-700);
+
+  /* Data viz sequence (charts, load bars) — leads with the brand pair */
+  --viz-1: var(--green-500);
+  --viz-2: var(--orange-500);
+  --viz-3: var(--indigo-500);
+  --viz-4: var(--amber-500);
+  --viz-5: var(--violet-500);
+  --viz-6: var(--red-500);
+
+  color-scheme: light;
+}
+
+/* ============================================================
+   SEMANTIC ALIASES — DARK
+   Applied via [data-theme="dark"] on <html> or any subtree.
+   Base ramps are unchanged; only the aliases re-point.
+   ============================================================ */
+
+[data-theme="dark"] {
+  --surface-app:      var(--slate-950);
+  --surface-card:     #0c1715;             /* slightly lifted from app */
+  --surface-raised:   #0f1c1a;
+  --surface-sunken:   #08110f;
+  --surface-hover:    #14211e;
+  --surface-active:   #1b2b27;
+  --surface-inverse:  var(--slate-100);
+
+  --text-strong:   var(--slate-50);
+  --text-body:     var(--slate-300);
+  --text-muted:    var(--slate-400);
+  --text-subtle:   var(--slate-500);
+  --text-inverse:  var(--slate-900);
+  --text-link:     var(--indigo-300);
+  --text-on-accent: #ffffff;
+
+  --border-subtle:  #1a2826;
+  --border-default: #233330;
+  --border-strong:  #32433f;
+  --border-focus:   var(--indigo-400);
+
+  --accent:          var(--indigo-500);
+  --accent-hover:    var(--indigo-400);
+  --accent-active:   var(--indigo-300);
+  --accent-subtle:   color-mix(in srgb, var(--indigo-500) 16%, var(--slate-950));
+  --accent-subtle-hover: color-mix(in srgb, var(--indigo-500) 26%, var(--slate-950));
+  --accent-border:   color-mix(in srgb, var(--indigo-500) 38%, var(--slate-950));
+  --accent-text:     var(--indigo-300);
+  --focus-ring:      color-mix(in srgb, var(--indigo-400) 42%, transparent);
+
+  --brand:           var(--green-500);
+  --brand-strong:    var(--green-400);
+  --brand-subtle:    color-mix(in srgb, var(--green-500) 16%, var(--slate-950));
+  --brand-border:    color-mix(in srgb, var(--green-500) 38%, var(--slate-950));
+  --brand-text:      var(--green-300);
+
+  --warm:            var(--orange-400);
+  --warm-hover:      var(--orange-300);
+  --warm-subtle:     color-mix(in srgb, var(--orange-500) 16%, var(--slate-950));
+  --warm-subtle-hover: color-mix(in srgb, var(--orange-500) 26%, var(--slate-950));
+  --warm-border:     color-mix(in srgb, var(--orange-500) 38%, var(--slate-950));
+  --warm-text:       var(--orange-300);
+
+  --success: #22c993; --success-bg: color-mix(in srgb, var(--green-500) 16%, var(--slate-950)); --success-border: color-mix(in srgb, var(--green-500) 34%, var(--slate-950));
+  --warning: #fbbf24; --warning-bg: color-mix(in srgb, var(--amber-500) 15%, var(--slate-950)); --warning-border: color-mix(in srgb, var(--amber-500) 32%, var(--slate-950));
+  --danger:  #f87171; --danger-bg:  color-mix(in srgb, var(--red-500) 15%, var(--slate-950));   --danger-border:  color-mix(in srgb, var(--red-500) 32%, var(--slate-950));
+  --info:    #60a5fa; --info-bg:    color-mix(in srgb, var(--sky-500) 15%, var(--slate-950));   --info-border:    color-mix(in srgb, var(--sky-500) 32%, var(--slate-950));
+  --ai:      #a78bfa; --ai-bg:      color-mix(in srgb, var(--violet-500) 16%, var(--slate-950));--ai-border:      color-mix(in srgb, var(--violet-500) 34%, var(--slate-950));
+
+  --ai-surface:  color-mix(in srgb, var(--violet-500) 12%, var(--slate-950));
+  --ai-strong:   #c4b5fd;
+
+  --viz-1: var(--green-400);
+  --viz-2: var(--orange-400);
+  --viz-3: var(--indigo-400);
+  --viz-4: var(--amber-500);
+  --viz-5: #a78bfa;
+  --viz-6: var(--red-500);
+
+  color-scheme: dark;
+}
