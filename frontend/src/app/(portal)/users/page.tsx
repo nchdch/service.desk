@@ -23,7 +23,9 @@ const columns: DataTableColumn<UserListItem>[] = [
   {
     key: 'role',
     header: 'Роль',
-    render: (row) => <Badge tone={ROLE_BADGE_TONE[row.role]}>{ROLE_LABELS[row.role]}</Badge>,
+    render: (row) => (
+      <Badge tone={ROLE_BADGE_TONE[row.role]}>{ROLE_LABELS[row.role]}</Badge>
+    ),
   },
   {
     key: 'organizationName',
@@ -34,7 +36,11 @@ const columns: DataTableColumn<UserListItem>[] = [
     key: 'isActive',
     header: 'Статус',
     render: (row) =>
-      row.isActive ? <Badge tone="success">Активен</Badge> : <Badge tone="neutral">Отключён</Badge>,
+      row.isActive ? (
+        <Badge tone="success">Активен</Badge>
+      ) : (
+        <Badge tone="neutral">Отключён</Badge>
+      ),
   },
 ];
 

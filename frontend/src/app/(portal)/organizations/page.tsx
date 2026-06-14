@@ -31,5 +31,11 @@ export default async function OrganizationsPage() {
 
   const organizations = (await res.json()) as OrganizationListItem[];
 
-  return <DataTable columns={columns} rows={organizations} rowKey={(row) => row.id} />;
+  return (
+    <DataTable
+      columns={columns}
+      rows={organizations}
+      rowKey={(row) => row.id}
+    />
+  );
 }
