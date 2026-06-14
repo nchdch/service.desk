@@ -22,6 +22,15 @@ interface MeResponseBody {
   organizationId: string | null;
 }
 
+interface UserSafe {
+  id: string;
+  email: string;
+  name: string;
+  role: string;
+  organizationId: string | null;
+  passwordHash?: string;
+}
+
 describe('Auth (e2e)', () => {
   let app: INestApplication;
   let password: string;
@@ -92,5 +101,49 @@ describe('Auth (e2e)', () => {
 
   it('rejects /auth/me without a token', async () => {
     await request(app.getHttpServer()).get('/auth/me').expect(401);
+  });
+
+  it('allows admin but blocks other roles on /organizations and /users', async () => {
+    const adminLoginRes = await request(app.getHttpServer())
+      .post('/auth/login')
+      .send({ email: 'admin@virtualoff.local', password })
+      .expect(201);
+    const adminToken = (adminLoginRes.body as LoginResponseBody).accessToken;
+
+    const orgsRes = await request(app.getHttpServer())
+      .get('/organizations')
+      .set('Authorization', `Bearer ${adminToken}`)
+      .expect(200);
+    expect(Array.isArray(orgsRes.body)).toBe(true);
+
+    const usersRes = await request(app.getHttpServer())
+      .get('/users')
+      .set('Authorization', `Bearer ${adminToken}`)
+      .expect(200);
+    const users = usersRes.body as UserSafe[];
+    expect(Array.isArray(users)).toBe(true);
+    expect(users[0].passwordHash).toBeUndefined();
+
+    for (const email of [
+      'manager@virtualoff.local',
+      'engineer@virtualoff.local',
+      'client@virtualoff.local',
+    ]) {
+      const loginRes = await request(app.getHttpServer())
+        .post('/auth/login')
+        .send({ email, password })
+        .expect(201);
+      const token = (loginRes.body as LoginResponseBody).accessToken;
+
+      await request(app.getHttpServer())
+        .get('/organizations')
+        .set('Authorization', `Bearer ${token}`)
+        .expect(403);
+
+      await request(app.getHttpServer())
+        .get('/users')
+        .set('Authorization', `Bearer ${token}`)
+        .expect(403);
+    }
   });
 });

@@ -1063,7 +1063,7 @@ git commit -m "Add JWT authentication: login and /auth/me"
 - Create: `backend/src/organizations/organizations.controller.ts`
 - Modify: `backend/src/organizations/organizations.module.ts`
 
-- [ ] **Step 1: Дополнить `backend/test/auth.e2e-spec.ts`**
+- [x] **Step 1: Дополнить `backend/test/auth.e2e-spec.ts`**
 
 Добавить новый тест внутрь того же `describe`, после существующих:
 
@@ -1114,7 +1114,7 @@ git commit -m "Add JWT authentication: login and /auth/me"
   });
 ```
 
-- [ ] **Step 2: Запустить e2e-тесты и убедиться, что новый тест падает**
+- [x] **Step 2: Запустить e2e-тесты и убедиться, что новый тест падает**
 
 ```bash
 cd backend
@@ -1122,7 +1122,7 @@ npm run test:e2e
 ```
 Ожидается: FAIL на новом тесте — `/organizations` возвращает 404 (роута пока нет).
 
-- [ ] **Step 3: Создать `backend/src/auth/decorators/roles.decorator.ts`**
+- [x] **Step 3: Создать `backend/src/auth/decorators/roles.decorator.ts`**
 
 ```typescript
 import { SetMetadata } from '@nestjs/common';
@@ -1132,7 +1132,7 @@ export const ROLES_KEY = 'roles';
 export const Roles = (...roles: Role[]) => SetMetadata(ROLES_KEY, roles);
 ```
 
-- [ ] **Step 4: Создать `backend/src/auth/guards/roles.guard.ts`**
+- [x] **Step 4: Создать `backend/src/auth/guards/roles.guard.ts`**
 
 ```typescript
 import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
@@ -1161,7 +1161,7 @@ export class RolesGuard implements CanActivate {
 }
 ```
 
-- [ ] **Step 5: Зарегистрировать `RolesGuard` как глобальный — обновить `backend/src/auth/auth.module.ts`**
+- [x] **Step 5: Зарегистрировать `RolesGuard` как глобальный — обновить `backend/src/auth/auth.module.ts`**
 
 ```typescript
 import { Module } from '@nestjs/common';
@@ -1201,7 +1201,7 @@ import { RolesGuard } from './guards/roles.guard';
 export class AuthModule {}
 ```
 
-- [ ] **Step 6: Создать `backend/src/users/users.controller.ts`**
+- [x] **Step 6: Создать `backend/src/users/users.controller.ts`**
 
 ```typescript
 import { Controller, Get } from '@nestjs/common';
@@ -1221,7 +1221,7 @@ export class UsersController {
 }
 ```
 
-- [ ] **Step 7: Обновить `backend/src/users/users.module.ts`**
+- [x] **Step 7: Обновить `backend/src/users/users.module.ts`**
 
 ```typescript
 import { Module } from '@nestjs/common';
@@ -1236,7 +1236,7 @@ import { UsersController } from './users.controller';
 export class UsersModule {}
 ```
 
-- [ ] **Step 8: Создать `backend/src/organizations/organizations.controller.ts`**
+- [x] **Step 8: Создать `backend/src/organizations/organizations.controller.ts`**
 
 ```typescript
 import { Controller, Get } from '@nestjs/common';
@@ -1256,7 +1256,7 @@ export class OrganizationsController {
 }
 ```
 
-- [ ] **Step 9: Обновить `backend/src/organizations/organizations.module.ts`**
+- [x] **Step 9: Обновить `backend/src/organizations/organizations.module.ts`**
 
 ```typescript
 import { Module } from '@nestjs/common';
@@ -1271,14 +1271,14 @@ import { OrganizationsController } from './organizations.controller';
 export class OrganizationsModule {}
 ```
 
-- [ ] **Step 10: Запустить e2e-тесты и убедиться, что все проходят**
+- [x] **Step 10: Запустить e2e-тесты и убедиться, что все проходят**
 
 ```bash
 npm run test:e2e
 ```
 Ожидается: PASS, все 5 тестов зелёные.
 
-- [ ] **Step 11: Commit**
+- [x] **Step 11: Commit**
 
 ```bash
 cd ..
