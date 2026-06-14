@@ -20,6 +20,7 @@ interface MeResponseBody {
   name: string;
   role: string;
   organizationId: string | null;
+  organizationName: string | null;
 }
 
 interface UserSafe {
@@ -98,6 +99,25 @@ describe('Auth (e2e)', () => {
     const body = res.body as MeResponseBody;
     expect(body.email).toBe('engineer@virtualoff.local');
     expect(body.role).toBe('ENGINEER');
+    expect(body.organizationName).toBeNull();
+  });
+
+  it('returns organizationName on /auth/me for a user with an organization', async () => {
+    const loginRes = await request(app.getHttpServer())
+      .post('/auth/login')
+      .send({ email: 'client@virtualoff.local', password })
+      .expect(201);
+
+    const loginBody = loginRes.body as LoginResponseBody;
+
+    const res = await request(app.getHttpServer())
+      .get('/auth/me')
+      .set('Authorization', `Bearer ${loginBody.accessToken}`)
+      .expect(200);
+
+    const body = res.body as MeResponseBody;
+    expect(body.email).toBe('client@virtualoff.local');
+    expect(body.organizationName).toBe('ООО Ромашка');
   });
 
   it('rejects /auth/me without a token', async () => {
