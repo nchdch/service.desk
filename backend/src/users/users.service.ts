@@ -10,8 +10,8 @@ export class UsersService {
     return this.prisma.user.findUnique({ where: { email } });
   }
 
-  findAllSafe() {
-    return this.prisma.user.findMany({
+  async findAllSafe() {
+    const users = await this.prisma.user.findMany({
       select: {
         id: true,
         email: true,
@@ -21,7 +21,13 @@ export class UsersService {
         isActive: true,
         createdAt: true,
         updatedAt: true,
+        organization: { select: { name: true } },
       },
     });
+
+    return users.map(({ organization, ...user }) => ({
+      ...user,
+      organizationName: organization?.name ?? null,
+    }));
   }
 }
