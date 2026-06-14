@@ -1,7 +1,7 @@
 import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { Sidebar } from './Sidebar';
-import type { CurrentUser } from '@/lib/auth';
+import type { CurrentUser } from '@/lib/roles';
 
 vi.mock('next/navigation', () => ({
   usePathname: () => '/',

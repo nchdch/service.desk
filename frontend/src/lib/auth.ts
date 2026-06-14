@@ -1,30 +1,8 @@
 import { apiFetch } from './api';
-import type { BadgeTone } from '@/components/ui/Badge';
+import type { CurrentUser } from './roles';
 
-export type UserRole = 'CLIENT' | 'ENGINEER' | 'MANAGER' | 'ADMIN';
-
-export interface CurrentUser {
-  id: string;
-  email: string;
-  name: string;
-  role: UserRole;
-  organizationId: string | null;
-  organizationName: string | null;
-}
-
-export const ROLE_LABELS: Record<UserRole, string> = {
-  CLIENT: 'Клиент',
-  ENGINEER: 'Инженер',
-  MANAGER: 'Руководитель',
-  ADMIN: 'Администратор',
-};
-
-export const ROLE_BADGE_TONE: Record<UserRole, BadgeTone> = {
-  CLIENT: 'neutral',
-  ENGINEER: 'info',
-  MANAGER: 'accent',
-  ADMIN: 'warning',
-};
+export type { UserRole, CurrentUser } from './roles';
+export { ROLE_LABELS, ROLE_BADGE_TONE } from './roles';
 
 export async function getCurrentUser(): Promise<CurrentUser | null> {
   const res = await apiFetch('/auth/me');

@@ -16,8 +16,8 @@ import {
 import { Avatar } from '@/components/ui/Avatar';
 import { Badge } from '@/components/ui/Badge';
 import { IconButton } from '@/components/ui/IconButton';
-import { ROLE_LABELS } from '@/lib/auth';
-import type { CurrentUser } from '@/lib/auth';
+import { ROLE_LABELS } from '@/lib/roles';
+import type { CurrentUser } from '@/lib/roles';
 
 interface NavItem {
   href: string;
