@@ -35,3 +35,15 @@
 - Реализована JWT-аутентификация (`POST /auth/login`, `GET /auth/me`) и RBAC (`GET /organizations`, `GET /users` — только ADMIN)
 - Сидинг: демо-организация + 4 тестовых пользователя (по одному на роль)
 - e2e-тесты покрывают аутентификацию и RBAC
+
+## 2026-06-14 — Frontend-фундамент (подпроект 1)
+
+- Создан фронтенд на Next.js 15 (App Router) + React 19 + TypeScript (`frontend/`), порт 3001
+- Аутентификация — BFF: httpOnly cookie `session` (JWT), Route Handlers `/api/auth/login`/`/api/auth/logout`, `middleware.ts` защищает все маршруты, кроме `/login`
+- Перенесена дизайн-система из `design/design-system/` (токены, шрифты Golos Text/JetBrains Mono, лого) в `frontend/src/styles/` и `frontend/public/`
+- Портированы UI-компоненты: Button, IconButton, Input, Card, Badge, Avatar, DataTable; новые — Sidebar (ролевая навигация), Topbar, LoginForm, AccessDenied
+- Layout: Sidebar с группами «Работа» (все роли, заглушка `/coming-soon`) и «Управление» (только ADMIN: Пользователи, Организации) + Topbar
+- Страницы: «Главная» (имя/email, роль, организация), «Пользователи» и «Организации» (ADMIN, `DataTable`, 403 → «Доступ запрещён»)
+- Backend: добавлено поле `organizationName` в ответы `GET /users` и `GET /auth/me`
+- Тесты: Vitest + React Testing Library (LoginForm, Sidebar, DataTable), Playwright e2e (логин под 4 ролями, навигация, logout)
+- Фронтенд развёрнут на сервере 10.3.0.88, порт 3001 (`nohup npm run start`, по аналогии с backend)
