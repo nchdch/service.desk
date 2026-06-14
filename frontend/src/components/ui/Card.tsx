@@ -2,7 +2,7 @@ import type { HTMLAttributes, ReactNode } from 'react';
 
 export type CardVariant = 'raised' | 'flat' | 'ghost';
 
-export interface CardProps extends HTMLAttributes<HTMLDivElement> {
+export interface CardProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {
   title?: ReactNode;
   subtitle?: ReactNode;
   icon?: ReactNode;

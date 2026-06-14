@@ -4,7 +4,8 @@ import type { ButtonHTMLAttributes } from 'react';
 export type IconButtonVariant = 'ghost' | 'solid' | 'primary';
 export type IconButtonSize = 'sm' | 'md' | 'lg';
 
-export interface IconButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+export interface IconButtonProps
+  extends ButtonHTMLAttributes<HTMLButtonElement> {
   label: string;
   variant?: IconButtonVariant;
   size?: IconButtonSize;
@@ -12,7 +13,18 @@ export interface IconButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>
 }
 
 export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
-  ({ label, variant = 'ghost', size = 'md', active = false, className, children, ...rest }, ref) => {
+  (
+    {
+      label,
+      variant = 'ghost',
+      size = 'md',
+      active = false,
+      className,
+      children,
+      ...rest
+    },
+    ref,
+  ) => {
     const classes = [
       'vds-iconbtn',
       variant !== 'ghost' ? `vds-iconbtn--${variant}` : '',
@@ -24,7 +36,13 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
       .join(' ');
 
     return (
-      <button ref={ref} className={classes} aria-label={label} title={label} {...rest}>
+      <button
+        ref={ref}
+        className={classes}
+        aria-label={label}
+        title={label}
+        {...rest}
+      >
         {children}
       </button>
     );

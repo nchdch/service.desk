@@ -1,7 +1,12 @@
 import { forwardRef } from 'react';
 import type { ButtonHTMLAttributes, ReactNode } from 'react';
 
-export type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'subtle' | 'danger';
+export type ButtonVariant =
+  | 'primary'
+  | 'secondary'
+  | 'ghost'
+  | 'subtle'
+  | 'danger';
 export type ButtonSize = 'sm' | 'md' | 'lg';
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -40,8 +45,17 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       .join(' ');
 
     return (
-      <button ref={ref} className={classes} disabled={disabled || loading} {...rest}>
-        {loading ? <span className="vds-btn__spin" aria-hidden="true" /> : iconLeft}
+      <button
+        ref={ref}
+        className={classes}
+        disabled={disabled || loading}
+        {...rest}
+      >
+        {loading ? (
+          <span className="vds-btn__spin" aria-hidden="true" />
+        ) : (
+          iconLeft
+        )}
         {children}
         {!loading && iconRight}
       </button>

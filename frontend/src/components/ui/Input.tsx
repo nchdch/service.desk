@@ -3,7 +3,8 @@ import type { InputHTMLAttributes, ReactNode } from 'react';
 
 export type InputSize = 'sm' | 'md';
 
-export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size'> {
+export interface InputProps
+  extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size'> {
   label?: string;
   hint?: string;
   error?: string;
@@ -29,7 +30,11 @@ export function Input({
   const inputId = id ?? generatedId;
   const hintId = `${inputId}-hint`;
 
-  const fieldClasses = ['vds-field', fullWidth ? 'vds-field--full' : '', className]
+  const fieldClasses = [
+    'vds-field',
+    fullWidth ? 'vds-field--full' : '',
+    className,
+  ]
     .filter(Boolean)
     .join(' ');
 
@@ -62,7 +67,10 @@ export function Input({
         />
       </div>
       {(hint || error) && (
-        <span id={hintId} className={`vds-field__hint ${error ? 'vds-field__hint--error' : ''}`.trim()}>
+        <span
+          id={hintId}
+          className={`vds-field__hint ${error ? 'vds-field__hint--error' : ''}`.trim()}
+        >
           {error || hint}
         </span>
       )}

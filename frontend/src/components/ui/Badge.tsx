@@ -1,6 +1,14 @@
 import type { HTMLAttributes, ReactNode } from 'react';
 
-export type BadgeTone = 'neutral' | 'accent' | 'warm' | 'success' | 'warning' | 'danger' | 'info' | 'ai';
+export type BadgeTone =
+  | 'neutral'
+  | 'accent'
+  | 'warm'
+  | 'success'
+  | 'warning'
+  | 'danger'
+  | 'info'
+  | 'ai';
 export type BadgeVariant = 'subtle' | 'solid' | 'outline';
 export type BadgeSize = 'sm' | 'md';
 
