@@ -20,7 +20,10 @@ export async function POST(request: NextRequest) {
   });
 
   if (!backendRes.ok) {
-    return NextResponse.json({ error: 'Неверный email или пароль' }, { status: backendRes.status });
+    return NextResponse.json(
+      { error: 'Неверный email или пароль' },
+      { status: backendRes.status },
+    );
   }
 
   const { accessToken } = (await backendRes.json()) as BackendLoginResponse;

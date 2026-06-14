@@ -6,7 +6,8 @@ const PUBLIC_PATHS = ['/login'];
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  const isPublic = PUBLIC_PATHS.includes(pathname) || pathname.startsWith('/api/auth/');
+  const isPublic =
+    PUBLIC_PATHS.includes(pathname) || pathname.startsWith('/api/auth/');
   const hasSession = request.cookies.has('session');
 
   if (!isPublic && !hasSession) {
@@ -17,5 +18,7 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/((?!_next/static|_next/image|favicon.ico|fonts|logo-mark.png).*)'],
+  matcher: [
+    '/((?!_next/static|_next/image|favicon.ico|fonts|logo-mark.png).*)',
+  ],
 };
