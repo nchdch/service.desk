@@ -2,7 +2,8 @@ import type { HTMLAttributes, ReactNode } from 'react';
 
 export type CardVariant = 'raised' | 'flat' | 'ghost';
 
-export interface CardProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {
+export interface CardProps
+  extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {
   title?: ReactNode;
   subtitle?: ReactNode;
   icon?: ReactNode;
@@ -49,10 +50,16 @@ export function Card({
             {title && <div className="vds-card__title">{title}</div>}
             {subtitle && <div className="vds-card__subtitle">{subtitle}</div>}
           </div>
-          {headerAction && <div className="vds-card__header-action">{headerAction}</div>}
+          {headerAction && (
+            <div className="vds-card__header-action">{headerAction}</div>
+          )}
         </div>
       )}
-      <div className={`vds-card__body ${flush ? 'vds-card__body--flush' : ''}`.trim()}>{children}</div>
+      <div
+        className={`vds-card__body ${flush ? 'vds-card__body--flush' : ''}`.trim()}
+      >
+        {children}
+      </div>
       {footer && <div className="vds-card__footer">{footer}</div>}
     </div>
   );
