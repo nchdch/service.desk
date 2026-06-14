@@ -10,7 +10,10 @@ export class ApiError extends Error {
   }
 }
 
-export async function apiFetch(path: string, init: RequestInit = {}): Promise<Response> {
+export async function apiFetch(
+  path: string,
+  init: RequestInit = {},
+): Promise<Response> {
   const session = (await cookies()).get('session')?.value;
 
   const headers = new Headers(init.headers);
