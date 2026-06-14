@@ -31,7 +31,7 @@ export async function POST(request: NextRequest) {
   const response = NextResponse.json({ ok: true });
   response.cookies.set('session', accessToken, {
     httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
+    secure: request.nextUrl.protocol === 'https:',
     sameSite: 'lax',
     maxAge: Number(process.env.SESSION_MAX_AGE_SECONDS ?? 28800),
     path: '/',
