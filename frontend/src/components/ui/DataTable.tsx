@@ -34,7 +34,9 @@ export function DataTable<T>({ columns, rows, rowKey }: DataTableProps<T>) {
             <tr key={rowKey(row)} className="vds-datatable__row">
               {columns.map((column) => (
                 <td key={column.key} className="vds-datatable__cell">
-                  {column.render ? column.render(row) : String(row[column.key] ?? '')}
+                  {column.render
+                    ? column.render(row)
+                    : String(row[column.key] ?? '')}
                 </td>
               ))}
             </tr>

@@ -20,7 +20,9 @@ describe('DataTable', () => {
       { id: '2', name: 'Анна Админова', email: 'admin@virtualoff.local' },
     ];
 
-    render(<DataTable columns={columns} rows={rows} rowKey={(row) => row.id} />);
+    render(
+      <DataTable columns={columns} rows={rows} rowKey={(row) => row.id} />,
+    );
 
     expect(screen.getByText('Иван Инженеров')).toBeInTheDocument();
     expect(screen.getByText('admin@virtualoff.local')).toBeInTheDocument();
