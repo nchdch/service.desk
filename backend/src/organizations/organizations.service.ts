@@ -8,4 +8,8 @@ export class OrganizationsService {
   findAll() {
     return this.prisma.organization.findMany();
   }
+
+  findById(id: string) {
+    return this.prisma.organization.findUnique({ where: { id } });
+  }
 }
