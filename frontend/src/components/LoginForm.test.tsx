@@ -18,11 +18,16 @@ describe('LoginForm', () => {
   });
 
   it('redirects to / on successful login', async () => {
-    vi.spyOn(global, 'fetch').mockResolvedValue(new Response(JSON.stringify({ ok: true }), { status: 200 }));
+    vi.spyOn(global, 'fetch').mockResolvedValue(
+      new Response(JSON.stringify({ ok: true }), { status: 200 }),
+    );
 
     render(<LoginForm />);
 
-    await userEvent.type(screen.getByLabelText('Email'), 'admin@virtualoff.local');
+    await userEvent.type(
+      screen.getByLabelText('Email'),
+      'admin@virtualoff.local',
+    );
     await userEvent.type(screen.getByLabelText('Пароль'), 'password123');
     await userEvent.click(screen.getByRole('button', { name: 'Войти' }));
 
@@ -34,15 +39,22 @@ describe('LoginForm', () => {
 
   it('shows an error message on invalid credentials', async () => {
     vi.spyOn(global, 'fetch').mockResolvedValue(
-      new Response(JSON.stringify({ error: 'Неверный email или пароль' }), { status: 401 }),
+      new Response(JSON.stringify({ error: 'Неверный email или пароль' }), {
+        status: 401,
+      }),
     );
 
     render(<LoginForm />);
 
-    await userEvent.type(screen.getByLabelText('Email'), 'admin@virtualoff.local');
+    await userEvent.type(
+      screen.getByLabelText('Email'),
+      'admin@virtualoff.local',
+    );
     await userEvent.type(screen.getByLabelText('Пароль'), 'wrong-password');
     await userEvent.click(screen.getByRole('button', { name: 'Войти' }));
 
-    expect(await screen.findByText('Неверный email или пароль')).toBeInTheDocument();
+    expect(
+      await screen.findByText('Неверный email или пароль'),
+    ).toBeInTheDocument();
   });
 });
