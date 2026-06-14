@@ -28,6 +28,7 @@ interface UserSafe {
   name: string;
   role: string;
   organizationId: string | null;
+  organizationName: string | null;
   passwordHash?: string;
 }
 
@@ -123,6 +124,12 @@ describe('Auth (e2e)', () => {
     const users = usersRes.body as UserSafe[];
     expect(Array.isArray(users)).toBe(true);
     expect(users[0].passwordHash).toBeUndefined();
+
+    const clientUser = users.find((u) => u.email === 'client@virtualoff.local');
+    expect(clientUser?.organizationName).toBe('ООО Ромашка');
+
+    const adminUser = users.find((u) => u.email === 'admin@virtualoff.local');
+    expect(adminUser?.organizationName).toBeNull();
 
     for (const email of [
       'manager@virtualoff.local',
