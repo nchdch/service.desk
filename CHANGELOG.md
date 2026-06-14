@@ -47,3 +47,9 @@
 - Backend: добавлено поле `organizationName` в ответы `GET /users` и `GET /auth/me`
 - Тесты: Vitest + React Testing Library (LoginForm, Sidebar, DataTable), Playwright e2e (логин под 4 ролями, навигация, logout)
 - Фронтенд развёрнут на сервере 10.3.0.88, порт 3001 (`nohup npm run start`, по аналогии с backend)
+
+## 2026-06-14 — Прод-фронтенд перенесён на порт 80
+
+- На node-бинарь (`/usr/bin/node`) выдан `cap_net_bind_service` (`setcap`), что позволяет процессу Next.js слушать привилегированный порт без root
+- Прод-инстанс фронтенда перезапущен на порту 80 (`next start -p 80`) — теперь доступен по `http://10.3.0.88/` без указания порта
+- Порт 3001 остаётся конфигурацией для dev/e2e (`npm run dev`, `playwright.config.ts`); прод использует порт 80
