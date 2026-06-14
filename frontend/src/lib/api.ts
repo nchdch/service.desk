@@ -1,15 +1,5 @@
 import { cookies } from 'next/headers';
 
-export class ApiError extends Error {
-  constructor(
-    public readonly status: number,
-    message: string,
-  ) {
-    super(message);
-    this.name = 'ApiError';
-  }
-}
-
 export async function apiFetch(
   path: string,
   init: RequestInit = {},
